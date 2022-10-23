@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
     import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,18 +25,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Lazy
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
+    CustomAuthenticationProvider custAuthProvide;
     @Override
-    protected void configure(AuthenticationManagerBuilder authManagerBuild) throws Exception {
-
-        InMemoryUserDetailsManager inMemory=new InMemoryUserDetailsManager();
-
-        UserDetails user=   User.withUsername("sagarapi")
-                .password(passwordEncoder.encode("sagarapi"))
-                .authorities("read")
-                .build();
-
-        inMemory.createUser(user);
-        authManagerBuild.userDetailsService(inMemory).passwordEncoder(passwordEncoder);
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(custAuthProvide);
     }
 
     @Override
