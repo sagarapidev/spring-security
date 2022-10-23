@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <JDBC name="MySQLAppender" tableName="LOG">
+            <ConnectionFactory class="com.basic.config.ConnectionFactory" method="getDatabaseConnection" />
+            <Column name="event_id" isUnicode="false" />
+            <Column name="event_date" isEventTimestamp="true" />
+            <Column name="level" pattern="%level" isUnicode="false"/>
+            <Column name="logger" pattern="%logger" isUnicode="false"/>
+            <Column name="message" pattern="%message" isUnicode="false"/>
+            <Column name="throwable" pattern="%ex{full}" isUnicode="false"/>
+        </JDBC>
+
+
+        <Console name="console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="[%d{yyyy-MM-dd'T'HH:mm:ss.sss'Z'}] [%C] [%t] [%L] [%-5p] %m%n"/>
+        </Console>
+
+        <File name="ERROR" fileName="logs/App_ERROR.log">
+            <PatternLayout pattern="[%d{yyyy-MM-dd'T'HH:mm:ss.sss'Z'}] [%C] [%t] [%L] [%-5p] %m%n" />
+        </File>
+
+        <!-- Rollover based on Log Size and Date Time -->
+        <RollingFile name="rollingFile" fileName="logs/App_INFO.log"
+                     filePattern="logs/backup/App_INFO.log.%d{dd-MMM}.zip"
+                     ignoreExceptions="false">
+            <PatternLayout pattern="[%d{yyyy-MM-dd'T'HH:mm:ss.sss'Z'}] [%C] [%t] [%L] [%-5p] %m%n"/>
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy max="5" />
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- ALL < TRACE < DEBUG < INFO < WARN < ERROR < FATAL < OFF-->
+
+        <Logger name="com.jdbcappender" level="info">
+            <AppenderRef ref="ERROR" level="error"/>
+
+        </Logger>
+
+        <Root level="debug">
+            <AppenderRef ref="MySQLAppender" level="ERROR"/>
+            <AppenderRef ref="console" level="INFO"/>
+            <AppenderRef ref="rollingFile" level="INFO"/>
+        </Root>
+    </Loggers>
+</Configuration>

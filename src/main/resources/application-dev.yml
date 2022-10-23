@@ -7,3 +7,13 @@ dev:
     hikari:
       idle-timeout: 10000
       maximum-pool-size: 20
+      idleTimeout: 30000
+      poolName: Spring-Security
+      maxLifetime: 2000000
+      connectionTimeout: 1000
+      leak-detection-threshold: 2100
+logging:
+  level:
+    com:
+      zaxxer:
+        hikari: debug
