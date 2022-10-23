@@ -6,4 +6,4 @@ dev:
     password: sagarapidev
     hikari:
       idle-timeout: 10000
-      maximum-pool-size=20:
+      maximum-pool-size: 20
