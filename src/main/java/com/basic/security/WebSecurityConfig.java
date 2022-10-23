@@ -24,8 +24,7 @@ public class WebSecurityConfig {
     CustomAuthenticationProvider authenticationProvider;
 
     @Bean
-    public AuthenticationManager authManager(HttpSecurity http, PasswordEncoder passwordEncoder,
-                                             UserDetailsService userDetailService) throws Exception {
+    public AuthenticationManager authManager(HttpSecurity http, PasswordEncoder passwordEncoder) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class).authenticationProvider(authenticationProvider)
                 .build();
     }
