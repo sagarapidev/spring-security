@@ -9,3 +9,6 @@ logging:
     org:
       hibernate:
         type: trace
+    com:
+      zaxxer:
+        hikari: debug
