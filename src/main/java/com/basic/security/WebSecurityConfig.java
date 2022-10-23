@@ -31,7 +31,8 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.httpBasic();
+       // http.httpBasic(); //POSTMAN
+        http.formLogin();
         http.authorizeRequests().anyRequest().authenticated();
         return http.build();
 
