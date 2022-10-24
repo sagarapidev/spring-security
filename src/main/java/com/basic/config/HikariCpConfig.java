@@ -1,11 +1,7 @@
 package com.basic.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
+import org.springframework.context.annotation.*;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -17,6 +13,7 @@ import com.zaxxer.hikari.HikariDataSource;
 })
 public class HikariCpConfig extends HikariConfig {
 
+    @Primary
     @Profile("dev")
     @Bean
     @ConfigurationProperties("dev.datasource")

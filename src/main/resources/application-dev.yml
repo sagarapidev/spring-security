@@ -1,7 +1,7 @@
 dev:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    jdbcUrl: jdbc:mysql://localhost:3306/sagarapidev
+    jdbcUrl: jdbc:mysql://localhost:3306/security-service
     username: sagarapidev
     password: sagarapidev
     hikari:

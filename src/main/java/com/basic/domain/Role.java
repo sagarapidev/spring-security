@@ -9,12 +9,9 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
 
 /**
  * An authority (a security role) used by Spring Security.
@@ -24,9 +21,10 @@ import org.hibernate.annotations.GenericGenerator;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "role")
-public class Role implements Serializable {
+public class Role{
 
 	private static final long serialVersionUID = 7565176670311275277L;
 	@Id
@@ -39,7 +37,7 @@ public class Role implements Serializable {
     private String name;
     
     @JsonIgnore
-	@ManyToMany(mappedBy = "roles")
+	@ManyToMany(mappedBy = "roles",fetch=FetchType.EAGER)
 	private Set<User> users=new HashSet<User>();
 
 }
