@@ -11,12 +11,7 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 @Getter
@@ -46,9 +41,9 @@ public class User implements Serializable {
          @NonNull
          @EqualsAndHashCode.Include
          private String email;
-         @JsonIgnoreProperties(ignoreUnknown = true)
-         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-         private String   password_hash;
+       //  @JsonIgnoreProperties(ignoreUnknown = true)
+       //  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+         private String   password;
          @JsonIgnoreProperties(ignoreUnknown = true)
          private String   image_url ;
          @JsonIgnoreProperties(ignoreUnknown = true)
@@ -72,8 +67,8 @@ public class User implements Serializable {
          
      	@ManyToMany(fetch=FetchType.EAGER)
     	@JoinTable(name="user_role",
-    			joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-    			inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
+    			joinColumns = {@JoinColumn(name = "uid", referencedColumnName = "id")},
+    			inverseJoinColumns = {@JoinColumn(name = "rid", referencedColumnName = "id")})
     	private Set<Role> roles=new HashSet<Role>();
 
 }

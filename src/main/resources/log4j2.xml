@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
     <Appenders>
-        <JDBC name="MySQLAppender" tableName="LOG">
+       <JDBC name="MySQLAppender" tableName="LOG">
             <ConnectionFactory class="com.basic.config.ConnectionFactory" method="getDatabaseConnection" />
             <Column name="event_id" isUnicode="false" />
             <Column name="event_date" isEventTimestamp="true" />
@@ -16,7 +16,7 @@
             <PatternLayout pattern="[%d{yyyy-MM-dd'T'HH:mm:ss.sss'Z'}] [%C] [%t] [%L] [%-5p] %m%n"/>
         </Console>
 
-        <File name="ERROR" fileName="logs/App_ERROR.log">
+        <File name="ERROR_FILE" fileName="logs/App_ERROR.log">
             <PatternLayout pattern="[%d{yyyy-MM-dd'T'HH:mm:ss.sss'Z'}] [%C] [%t] [%L] [%-5p] %m%n" />
         </File>
 
@@ -44,7 +44,8 @@
 
         <Root level="debug">
             <AppenderRef ref="MySQLAppender" level="ERROR"/>
-            <AppenderRef ref="console" level="INFO"/>
+            <AppenderRef ref="console" level="debug"/>
+            <AppenderRef ref="ERROR_FILE" level="ERROR"/>
             <AppenderRef ref="rollingFile" level="INFO"/>
         </Root>
     </Loggers>

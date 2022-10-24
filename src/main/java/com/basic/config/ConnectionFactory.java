@@ -1,3 +1,4 @@
+
 package com.basic.config;
 
 import java.sql.Connection;
@@ -12,6 +13,7 @@ import org.apache.commons.dbcp.PoolableConnectionFactory;
 import org.apache.commons.dbcp.PoolingDataSource;
 import org.apache.commons.pool.impl.GenericObjectPool;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.env.Environment;
 
 
@@ -34,7 +36,7 @@ public class ConnectionFactory {
         
         GenericObjectPool<PoolableConnection> pool = new GenericObjectPool<PoolableConnection>();
         DriverManagerConnectionFactory connectionFactory = new DriverManagerConnectionFactory(
-        		"jdbc:mysql://localhost:3306/sagarapidev", properties);
+        		"jdbc:mysql://localhost:3306/security-service", properties);
         new PoolableConnectionFactory(
                 connectionFactory, pool, null, "SELECT 1", 3, false, false, Connection.TRANSACTION_READ_COMMITTED
         );
@@ -46,3 +48,4 @@ public class ConnectionFactory {
         return Singleton.INSTANCE.dataSource.getConnection();
     }
 }
+
