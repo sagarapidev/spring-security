@@ -1,6 +1,6 @@
 -- sagarapidev.logs definition
 
-CREATE TABLE if not exist `logs` (
+CREATE TABLE if not exists `logs` (
   `event_id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `event_date` datetime DEFAULT NULL,
   `level` varchar(255) DEFAULT NULL,
